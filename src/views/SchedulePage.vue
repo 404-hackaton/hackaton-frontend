@@ -7,10 +7,16 @@ import ScheduleDatepicker from "@/components/ScheduleDatepickerComponent.vue";
 
 <template>
   <Header header="Расписание" />
-  <ScheduleDatepicker />
+  <div class="content">
+    <div class="data flex justify-center items-center w-full">
+      <ScheduleDatepicker />
+    </div>
+  </div>
   <Navbar />
 </template>
 
 <style scoped>
-
+.data{
+  margin-top: 25px;
+}
 </style>
