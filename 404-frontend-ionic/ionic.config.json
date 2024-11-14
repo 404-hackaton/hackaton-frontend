@@ -1,7 +1,0 @@
-{
-  "name": "404-frontend-ionic",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite"
-}
