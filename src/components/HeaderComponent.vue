@@ -4,7 +4,7 @@ const props = defineProps(['header'])
 
 <template>
   <header class="w-full prosto text-start text-2xl ">
-    <h1>
+    <h1 class="text-white">
       {{ props.header }}
     </h1>
   </header>

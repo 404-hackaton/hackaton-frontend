@@ -3,20 +3,28 @@
 import Header from '../components/HeaderComponent.vue';
 import Navbar from '../components/NavbarComponent.vue';
 import ScheduleDatepicker from "@/components/ScheduleDatepickerComponent.vue";
+import ScheduleItem from "@/components/ScheduleItemComponent.vue";
 </script>
 
 <template>
   <Header header="Расписание" />
   <div class="content">
-    <div class="data flex justify-center items-center w-full">
+    <div class="data flex flex-col justify-center items-center w-full">
       <ScheduleDatepicker />
+      <div class="content">
+        <ScheduleItem itemId="1" />
+      </div>
     </div>
   </div>
   <Navbar />
 </template>
 
 <style scoped>
-.data{
-  margin-top: 25px;
+
+.content{
+  margin-top: 10px;
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 </style>
