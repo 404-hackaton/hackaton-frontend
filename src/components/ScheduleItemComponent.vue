@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import {useIonRouter} from "@ionic/vue";
+
+const ionRouter = useIonRouter();
 const props = defineProps(['itemId'])
-console.log(props.itemId)
+
 const lesson_type='lec';
 let color='';
 if (lesson_type == 'lec'){ color='#9B5DE5'} else if (lesson_type == 'prac'){ color='#4A7C59'} else if (lesson_type == 'lab'){ color='#DB7C26'}
@@ -9,7 +12,7 @@ if (lesson_type == 'lec'){ color='#9B5DE5'} else if (lesson_type == 'prac'){ col
 </script>
 
 <template>
-  <a :href="'/lesson/'+props.itemId">
+  <div @click="ionRouter.navigate(`/lesson/${props.itemId}`, 'forward', 'push')">
     <div class="schedule-card relative prosto">
       <p class="card-attendance absolute z-10">Н</p>
       <h4 class="card-header z-10">Математический анализ</h4>
@@ -34,7 +37,7 @@ if (lesson_type == 'lec'){ color='#9B5DE5'} else if (lesson_type == 'prac'){ col
       <img class="card-image" src="/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="">
       <p class="card-type absolute z-10" :style="{ background: color}">Лекция</p>
     </div>
-  </a>
+  </div>
 </template>
 
 <style scoped>

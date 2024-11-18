@@ -5,5 +5,14 @@
     font-style: normal;
 }
 :root{
-    overflow-y: visible !important;
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+.content{
+    overflow-y: scroll;
+    padding-bottom:230px !important;
+    height: 100%;
+}
+ion-content{
+    --background: #FFF;
 }

@@ -1,15 +1,19 @@
 <script setup lang="ts">
 
+import {useIonRouter} from "@ionic/vue";
+
+const ionRouter = useIonRouter();
+
 </script>
 
 <template>
 <div class="prenav">
   <nav>
-    <a href="/schedule">
+    <div @click="ionRouter.navigate('/schedule', 'root', 'replace')" >
       <div>
         <img class="icon" src="/icons/calendar_month_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="">
       </div>
-    </a>
+    </div>
     <div>
       <img src="/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="icon">
     </div>
