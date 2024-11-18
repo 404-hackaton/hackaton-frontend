@@ -26,6 +26,7 @@
     </div>
   </nav>
 </div>
+
 </template>
 
 <style scoped>
@@ -56,7 +57,9 @@
   bottom:0;
   left:0;
   width:100vw;
+  z-index: 1000;
 }
+
 nav{
   height: 100%;
   min-height: 70px;

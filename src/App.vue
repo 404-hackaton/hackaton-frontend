@@ -2,7 +2,7 @@
   <!-- Wrap IonApp with KonstaProvider with theme="parent" -->
   <k-provider theme="parent">
     <ion-app>
-      <ion-router-outlet />
+      <ion-router-outlet class="bg-white" />
     </ion-app>
   </k-provider>
 </template>

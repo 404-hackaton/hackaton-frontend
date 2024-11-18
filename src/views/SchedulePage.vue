@@ -4,6 +4,7 @@ import Header from '../components/HeaderComponent.vue';
 import Navbar from '../components/NavbarComponent.vue';
 import ScheduleDatepicker from "@/components/ScheduleDatepickerComponent.vue";
 import ScheduleItem from "@/components/ScheduleItemComponent.vue";
+import BreakSchedule from "@/components/BreakScheduleComponent.vue";
 </script>
 
 <template>
@@ -13,6 +14,8 @@ import ScheduleItem from "@/components/ScheduleItemComponent.vue";
       <ScheduleDatepicker />
       <div class="content">
         <ScheduleItem itemId="1" />
+        <BreakSchedule breakDuration="10" />
+        <ScheduleItem itemId="2" />
       </div>
     </div>
   </div>
