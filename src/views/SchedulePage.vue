@@ -7,23 +7,70 @@ import ScheduleItem from "@/components/ScheduleItemComponent.vue";
 import BreakSchedule from "@/components/BreakScheduleComponent.vue";
 
 import { IonPage } from '@ionic/vue';
-import { ref } from 'vue';
+import {ref, useTemplateRef} from 'vue';
 
 const selectedDate = ref(new Date().toISOString());
-const transitionName = ref("slide-left"); // Стандартная анимация
-const shouldShowContent = ref(true);
+const shouldShowContent1 = ref(true);
+const shouldShowContent2 = ref(true);
+const shouldShowContent3 = ref(true);
+
+const contentEl = useTemplateRef('contentEl');
+
+const days = ref([
+    ["1", "2", "3"],
+    ["1", "2", "3"],
+    ["1", "2", "3"]
+]);
+
+const position = ref("-100vw");
+const animation = ref("transform 0.5s ease-in-out");
+
+const getNewDate = (newDate: Date) => {
+  const rnewDate = ["1", "2", "4"];
+  console.log(rnewDate);
+  return rnewDate;
+}
+
+
+
+
+
 
 const handleDateChange = (newDate: Date, oldDate: Date) => {
   const newDateObj = new Date(newDate);
   const currentDateObj = new Date(oldDate);
-  console.log(newDateObj.toDateString(), currentDateObj.toDateString());
-  // Определяем направление
+
   if (newDateObj > currentDateObj) {
-    transitionName.value = "slide-left"; // Переход вперед
-    console.log(transitionName.value);
+    animation.value = "transform 0.5s ease-in-out";
+    position.value = "-200vw";
+
+
+    setTimeout( () =>{
+      days.value.shift();
+      days.value.push(getNewDate(newDate));
+      console.log(days.value);
+
+      animation.value = "none";
+      position.value = "-100vw";
+
+    }, 500);
+
+
+
   } else if (newDateObj < currentDateObj) {
-    transitionName.value = "slide-right"; // Переход назад
-    console.log(transitionName.value);
+    animation.value = "transform 0.5s ease-in-out";
+    position.value = "0";
+
+
+    setTimeout( () =>{
+      days.value.pop();
+      days.value.unshift(getNewDate(newDate));
+      console.log(days.value);
+
+      animation.value = "none";
+      position.value = "-100vw";
+
+    }, 500);
   }
 
   // Добавляем небольшую задержку для работы анимации
@@ -39,18 +86,14 @@ const handleDateChange = (newDate: Date, oldDate: Date) => {
   <ion-page>
     <Header header="Расписание" />
     <ion-content>
-      <div class="content">
-        <ScheduleDatepicker @dateChanged="handleDateChange" />
-        <transition :name="transitionName">
-          <div v-if="shouldShowContent" class="data flex flex-col justify-center items-center w-full">
+      <div class="w-full flex justify-center ">
+        <ScheduleDatepicker class="datapick" @dateChanged="handleDateChange" />
+      </div>
+      <div class="contentc" ref="contentEl">
 
-            <div class="content">
-              <ScheduleItem itemId="1" />
-              <BreakSchedule breakDuration="10" />
-              <ScheduleItem itemId="2" />
-            </div>
-          </div>
-        </transition>
+        <div class="content" v-for="day in days" :key="day[0]">
+          <ScheduleItem v-for="item in day" :key="item" />
+        </div>
       </div>
     </ion-content>
     <Navbar />
@@ -59,46 +102,38 @@ const handleDateChange = (newDate: Date, oldDate: Date) => {
 
 <style scoped>
 
-.slide-left-enter-active,
-.slide-right-enter-active,
-.slide-left-leave-active,
-.slide-right-leave-active {
-  transition: transform 0.3s ease-in-out;
-}
 
-/* Новая позиция начальной и конечной анимации для плавного ухода */
-.slide-left-enter-from {
-  transform: translateX(100%);
-}
 
-.slide-left-leave-to {
-  transform: translateX(-100%);
-}
-
-.slide-right-enter-from {
-  transform: translateX(-100%);
-}
-
-.slide-right-leave-to {
-  transform: translateX(100%);
-}
-
-/* Добавляем уход старого дня */
-.slide-left-leave-active {
-  position: absolute;
-  width: 100%;
-}
-
-.slide-right-leave-active {
-  position: absolute;
-  width: 100%;
-}
-
-.content {
+.contentc{
   margin-top: 10px;
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  overflow-x: clip;
+  width: 300vw;
+  transform: translateX(v-bind(position));
+  transition: v-bind(animation);
 }
+
+.datapick{
+  margin-top: 10px;
+  width: 340px;
+}
+
+
+.content {
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
 </style>
 
