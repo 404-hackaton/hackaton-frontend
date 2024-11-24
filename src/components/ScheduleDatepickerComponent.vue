@@ -1,53 +1,59 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, defineExpose } from 'vue';
 import { IonDatetime } from "@ionic/vue";
 
 const emit = defineEmits(["dateChanged"]);
 
 const isMenuOpened = ref(false);
-const currentDate = ref(new Date());
+const currentDate = ref(new Date().toISOString());
+const oldGDate = ref(new Date().toISOString());
+const props = defineProps(['disabled']);
+
 
 // Форматированная дата и день недели
-const formattedDate = ref(
-    currentDate.value.toLocaleDateString("ru-RU", { year: "numeric", month: "numeric", day: "numeric" })
-);
-const weekDay = ref(
-    ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"][currentDate.value.getDay()]
-);
+const formattedDate = computed(() => {
+  return new Date(currentDate.value).toLocaleDateString("ru-RU", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+});
 
-function updateFormattedDate() {
-    formattedDate.value = currentDate.value.toLocaleDateString("ru-RU", { year: "numeric", month: "numeric", day: "numeric" });
-}
-function updateWeekDay() {
-    weekDay.value = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"][currentDate.value.getDay()];
-}
+const weekDay = computed(() => {
+  return ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"][
+      new Date(currentDate.value).getDay()
+      ];
+});
 
-// Изменение даты
+
+
 const changeDateBy = (days: number) => {
   const oldDate = new Date(currentDate.value);
-  currentDate.value.setDate(currentDate.value.getDate() + days);
-  updateFormattedDate();
-  updateWeekDay();
-  emit("dateChanged", new Date(currentDate.value), oldDate);
+  const newDateObj = new Date(currentDate.value);
+  newDateObj.setDate(newDateObj.getDate() + days);
+  currentDate.value = newDateObj.toISOString();
+  emit("dateChanged", newDateObj, oldDate);
 };
 
-// Обработчик изменения в календаре
 const handleCalendarChange = (event: any) => {
+  const oldDate = new Date(oldGDate.value);
   const newDate = new Date(event.detail.value);
-  const oldDate = new Date(currentDate.value);
-  currentDate.value = newDate;
-  updateFormattedDate();
-  updateWeekDay();
+  oldGDate.value = newDate.toISOString();
   emit("dateChanged", newDate, oldDate);
 };
 
-const july31 = new Date(2025, 6, 31);
+
+const july31 = new Date(2025, 6, 31).toISOString();
+
+defineExpose({
+  changeDateBy,
+});
 </script>
 
 <template>
   <div class="datapick items-center px-5">
     <div class="flex flex-row w-full justify-between">
-      <div @click="changeDateBy(-1)">
+      <div @click="!props.disabled && changeDateBy(-1)">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
           <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
         </svg>
@@ -55,7 +61,7 @@ const july31 = new Date(2025, 6, 31);
       <div @click="isMenuOpened = !isMenuOpened" class="prosto w-full text-center text-2xl">
         {{ weekDay }} - {{ formattedDate }}
       </div>
-      <div @click="changeDateBy(1)">
+      <div @click="!props.disabled && changeDateBy(1)">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
           <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
         </svg>
@@ -66,11 +72,12 @@ const july31 = new Date(2025, 6, 31);
           :first-day-of-week="1"
           @ionChange="handleCalendarChange"
           min="2024-09-01"
-          :max="july31.toISOString()"
+          :max="july31"
           v-model="currentDate"
           presentation="date"
           locale="ru-RU"
           displayFormat="DD.MM.YYYY"
+          :disabled="props.disabled"
       ></ion-datetime>
     </div>
   </div>
