@@ -41,7 +41,7 @@ const { id } = route.params;
           </div>
           <div class="chart">
             <DonutChartComponent :percentage="70" :text="'баллов набрано'" />
-            <p class="text-end">
+            <p class="text-end" @click="ionRouter.push(`/edu/courseId/${id}/grades`, 'forward', 'push')"  >
               Подробнее <svg class="inline" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
             </p>
           </div>

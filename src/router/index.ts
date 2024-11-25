@@ -7,6 +7,7 @@ import EducationPage from "@/views/Education/EducationPage.vue";
 import CoursePage from "@/views/Education/CoursePage.vue";
 import TasksPage from "@/views/Education/TasksPage.vue";
 import AttendancePage from "@/views/Education/AttendancePage.vue";
+import GradesPage from "@/views/Education/GradesPage.vue";
 
 
 
@@ -52,6 +53,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/edu/courseId/:id/attendance',
     component: AttendancePage
+  },
+  {
+    path: '/edu/courseId/:id/grades',
+    component: GradesPage
   },
   {
     path: '/lesson/:id',
