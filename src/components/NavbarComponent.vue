@@ -22,10 +22,10 @@ const ionRouter = useIonRouter();
         <img class="icon-big" src="/icons/qr_code_scanner_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="">
       </div>
     </div>
-    <div>
-      <img src="/icons/import_contacts_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="icon">
+    <div @click="ionRouter.navigate('/statistics', 'root', 'replace')">
+      <img src="/icons/bar_chart_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="icon">
     </div>
-    <div>
+    <div @click="ionRouter.navigate('/me', 'root', 'replace')">
       <img src="/icons/person_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="icon">
     </div>
   </nav>

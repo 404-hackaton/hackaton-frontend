@@ -8,6 +8,8 @@ import CoursePage from "@/views/Education/CoursePage.vue";
 import TasksPage from "@/views/Education/TasksPage.vue";
 import AttendancePage from "@/views/Education/AttendancePage.vue";
 import GradesPage from "@/views/Education/GradesPage.vue";
+import StatisticsPage from "@/views/Statistics/StatisticsPage.vue";
+import GPAPage from "@/views/Statistics/GPAPage.vue";
 
 
 
@@ -61,6 +63,22 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/lesson/:id',
     component: LessonPage
+  },
+  {
+    path: '/statistics',
+    component: StatisticsPage
+  },
+  {
+    path: '/statistics/GPA',
+    component: GPAPage
+  },
+  {
+    path: '/statistics/percentel',
+    component: () => import('@/views/Statistics/PercentelPage.vue')
+  },
+  {
+    path: '/statistics/attendance',
+    component: () => import('@/views/Statistics/AttendancePage.vue')
   },
   {
     path: '/:catchAll(.*)',

@@ -37,9 +37,9 @@ const series = ref([props.percentage, 100-props.percentage])
 
 <template>
 <div class="relative">
-  <apexchart type="donut" :options="options" :series="series" ></apexchart>
+  <apexchart type="donut" :options="options" :series="series" />
   <h3 class="absolute header prosto">{{props.percentage}}%</h3>
-  <h3 class="absolute header1 prosto">{{props.text}}</h3>
+  <h3 class="absolute header1 prosto w-full text-center">{{props.text}}</h3>
 </div>
 </template>
 
