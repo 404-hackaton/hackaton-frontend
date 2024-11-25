@@ -12,7 +12,7 @@ if (lesson_type == 'lec'){ color='#9B5DE5'} else if (lesson_type == 'prac'){ col
 </script>
 
 <template>
-  <div @click="ionRouter.navigate(`/lesson/${props.itemId}`, 'forward', 'push')">
+  <div class="w-full flex justify-center" @click="ionRouter.navigate(`/lesson/${props.itemId}`, 'forward', 'push')">
     <div class="schedule-card relative prosto">
       <p class="card-attendance absolute z-10">Н</p>
       <h4 class="card-header z-10">Математический анализ</h4>
@@ -49,6 +49,7 @@ if (lesson_type == 'lec'){ color='#9B5DE5'} else if (lesson_type == 'prac'){ col
   padding: 10px;
   color: black;
   overflow: hidden;
+  width: calc(100vw - 40px);
 }
 
 .schedule-icon{

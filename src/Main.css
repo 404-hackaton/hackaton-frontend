@@ -7,11 +7,20 @@
 :root{
     overflow-y: scroll;
     overflow-x: hidden;
+    --ion-background-color: #ffffff !important;
+    --ion-background-color-rgb: 255,255,255 !important;
+
+    --ion-text-color: #000000 !important;
+    --ion-text-color-rgb: 0,0,0 !important;
 }
 .content{
     overflow-y: scroll;
     padding-bottom:230px !important;
     height: 100%;
+}
+ion-list, ion-item, ion-input {
+    --background: #FFF;
+    --ion-background-color: #ffffff !important;
 }
 ion-content{
     --background: #FFF;

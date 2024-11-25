@@ -5,6 +5,7 @@ import Navbar from '../components/NavbarComponent.vue';
 
 import { IonPage } from '@ionic/vue';
 import { useRoute } from 'vue-router';
+import KostilComponent from "@/components/KostilComponent.vue";
 const route = useRoute();
 
 const { id } = route.params;
@@ -115,9 +116,7 @@ if (lesson_type == 'lec'){
         </div>
       </div>
       </div>
-      <div class="absolute top-0 left-0 w-full h-full -z-10">
-        <button class="w-full h-full bg-white text-white">a</button>
-      </div>
+      <KostilComponent />
     </ion-content>
     <Navbar />
   </ion-page>
