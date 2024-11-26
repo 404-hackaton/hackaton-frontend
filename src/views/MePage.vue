@@ -22,37 +22,44 @@ const foreground = ref('#000000')
 
 const size = ref(100); // Размер для основного QR-кода
 const sizeBig = ref(400); // Размер для QR-кода в модальном окне
+const closeClass = ref('')
+
+const closeModal = () => {
+  closeClass.value = 'close'
+  setTimeout(() => {
+    isOpen.value = false
+    closeClass.value = ''
+  }, 270)
+}
 </script>
 
 <template>
   <ion-page>
     <Header header="Студент" />
     <ion-content>
-      <ion-modal :is-open="isOpen">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title >QR-код</ion-title>
-            <ion-buttons slot="end">
-              <ion-button @click="isOpen = false">Close</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding modal">
-          <div class="flex w-full h-full justify-center items-center modal flex-col prosto">
-            <qrcode-vue
-                :value="value"
-                :level="level"
-                :render-as="renderAs"
-                :background="background"
-                :foreground='foreground'
-                :size="sizeBig"
-                :gradient="false"
-            />
-            <h3>Иванов Иван Иванович</h3>
-            <h3>Группа ЭФБО-16-24</h3>
+      <div v-if="isOpen" class="modal-backdrop" :class="closeClass">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>QR-код</h2>
+            <button @click="closeModal">Закрыть</button>
           </div>
-        </ion-content>
-      </ion-modal>
+          <div class="modal-body">
+            <div class="flex w-full h-full justify-center items-center modal flex-col prosto">
+              <qrcode-vue
+                  :value="value"
+                  :level="level"
+                  :render-as="renderAs"
+                  :background="background"
+                  :foreground='foreground'
+                  :size="sizeBig"
+                  :gradient="false"
+              />
+              <h3>Иванов Иван Иванович</h3>
+              <h3>Группа ЭФБО-16-24</h3>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="content prosto">
         <div class="studak">
           <div>
@@ -125,12 +132,45 @@ p {
 h2 {
   font-size: 20px;
 }
-ion-toolbar{
-  --background: #1B98E0;
+.close{
+  animation: fadeOut 0.3s;
 }
-.modal{
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s;
+  z-index: 1001;
+}
+.close > .modal-content {
+  animation: slideOut 0.3s;
+}
+.modal-content {
   background: #d9d9d9;
-  --background: #d9d9d9;
+  padding: 20px;
+  border-radius: 10px;
+  animation: slideIn 0.3s;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h2 {
+  margin: 0;
+}
+.modal-body {
+  margin-top: 20px;
+}
+.modal-body h3 {
+  font-size: 25px;
+  text-align: center;
 }
 
 .modal > h3 {
@@ -155,5 +195,39 @@ ion-toolbar{
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 </style>
