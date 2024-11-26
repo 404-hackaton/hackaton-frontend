@@ -7,24 +7,20 @@
   </k-provider>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { kProvider } from 'konsta/vue';
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
-import { defineComponent } from 'vue';
+
+
+import { StatusBar, Style } from '@capacitor/status-bar';
+
+StatusBar.setBackgroundColor("#1B98E0");
+StatusBar.setStyle({ style: Style.Light });
 
 
 
 
 
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    IonApp,
-    IonRouterOutlet,
-    kProvider,
-  },
-});
 </script>
 
 <style>

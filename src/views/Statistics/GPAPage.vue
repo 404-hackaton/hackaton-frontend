@@ -4,6 +4,7 @@ import LineChartComponent from "@/components/LineChartComponent.vue";
 import Header from "@/components/HeaderComponent.vue";
 import {IonPage} from "@ionic/vue";
 import Navbar from "@/components/NavbarComponent.vue";
+import KostilComponent from "@/components/KostilComponent.vue";
 
 const chartData = [
   { month: 'сен', percent: 40 },
@@ -28,6 +29,7 @@ const chartData = [
           <LineChartComponent :data="chartData" :width="350" :height="500" />
         </div>
       </div>
+      <KostilComponent />
     </ion-content>
     <Navbar />
   </ion-page>

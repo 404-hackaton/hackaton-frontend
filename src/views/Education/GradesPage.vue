@@ -4,6 +4,7 @@ import {IonPage} from "@ionic/vue";
 import Header from "@/components/HeaderComponent.vue";
 import Navbar from "@/components/NavbarComponent.vue";
 import DonutChartComponent from "@/components/DonutChartComponent.vue";
+import KostilComponent from "@/components/KostilComponent.vue";
 
 const tests_grid = [
   {
@@ -72,6 +73,7 @@ const tests_grid = [
           </div>
         </div>
       </div>
+      <KostilComponent />
     </ion-content>
     <Navbar />
   </ion-page>

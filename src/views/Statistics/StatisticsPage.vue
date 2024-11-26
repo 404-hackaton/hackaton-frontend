@@ -5,6 +5,7 @@ import {IonPage} from "@ionic/vue";
 import Navbar from "@/components/NavbarComponent.vue";
 import DonutChartComponent from "@/components/DonutChartComponent.vue";
 import {useIonRouter} from "@ionic/vue";
+import KostilComponent from "@/components/KostilComponent.vue";
 const ionRouter = useIonRouter();
 </script>
 
@@ -35,6 +36,7 @@ const ionRouter = useIonRouter();
 
         </div>
       </div>
+      <KostilComponent />
     </ion-content>
     <Navbar />
   </ion-page>

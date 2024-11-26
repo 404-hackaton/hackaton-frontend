@@ -81,6 +81,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Statistics/AttendancePage.vue')
   },
   {
+    path: '/me',
+    component: () => import('@/views/MePage.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     component: () => import('@/views/NotFoundPage.vue')
   }

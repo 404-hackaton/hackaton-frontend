@@ -24,6 +24,7 @@ ion-list, ion-item, ion-input {
 }
 ion-content{
     --background: #FFF;
+    background: #FFF;
     overflow-y: scroll;
     height: 100%;
 }
